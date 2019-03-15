@@ -19,9 +19,23 @@ $("#search-button").click(function(){
                 }
                 gifs.push(x);
                 $("#main").append("<img src=" + response.data[x].images.original.url + ">");
+                $("img").click(function(){
+                    $(this).css("height", "100%");
+                    $(this).css("width", "100%");
+                    
+                });
                 console.log(response.data[x].images.original.url);
             }
             lastSearch = searchBar;
         },
     });
+});
+$("#record").click(function(){
+   var recognition = new window.webkitSpeechRecognition();
+    recognition.onresult = function(event) {
+    var text = event.results[0][0].transcript;
+    $("input").val(text);
+    console.log(text);
+    };
+    recognition.start();
 });
